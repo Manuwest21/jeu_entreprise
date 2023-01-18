@@ -7,7 +7,7 @@ import random as rd
      "points_de_vie_joueur" : 50,
      "points_de_vie_ennemi" : 50,
      "potions" : 3,
-     "tour_jouer" : 1,
+     "tour_joueur" : 1,
      "tour_ennemi" : 0,
      "score" : 0
  }
