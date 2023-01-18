@@ -35,6 +35,22 @@ Effets critiques des actions.
 
 
 
+CHoix_arme
+    - demander une arme a choisir. - epee
+        - parmi 3.
+    - modification du multiplicateur de dégats.
+    
+    - attaquer - > l'ennemi perd des points de vie
+        - autant de pv que le multiplicateur le permet.
+        
+    
+
+
+
+
+
+
+
 
 
 
