@@ -39,7 +39,8 @@ class TestAddWithUnittest(unittest.TestCase):
     def test_usage_potion(self):
         self.assertEqual(usage_potions(), True)
 
-
+    def test_attaque_jouer(self):
+        self.
 
 
 
