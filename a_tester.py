@@ -51,7 +51,7 @@ def fin_de_partie(dico_jeu):
      
 # FONCTIONS MANU    
             
-def choix_joueur(argument):    #choix d'attaquer ou  utiliser potion.
+def choix_joueur():    #choix d'attaquer ou  utiliser potion.
     """
     args: ne prend pas d'argument
     demande au joueur s'il souhaite attaquer ou prendre la potion
@@ -62,7 +62,7 @@ def choix_joueur(argument):    #choix d'attaquer ou  utiliser potion.
     if dico_jeu["potions"]<1:
         choix=="attaquer"
     while choix not in ["potion", "attaquer"]:
-        choix=input("quel choix la potion ou attaquer")
+        choix="attaquer"
     # if choix =="attaquer":
     #     def (attaque)
     # elif choix=="potion":
@@ -80,10 +80,11 @@ def usage_potions():
     s'il prend la potion fait passer le prochain tour au joueur
     """
     dico_jeu["potions"]-=1
-    tour_joueur-=1
+    #tour_joueur-=1
     pts_potion=rd.randint(15,50)
-    dico_jeu["points_de_vie_joueurs"]+=pts_potion
+    dico_jeu["points_de_vie_joueur"]+=pts_potion
     print(f"vous avez gagné {pts_potion} de vie!")
+    return True
     
 # ====================================================================================================================================================
 

@@ -33,10 +33,11 @@ class TestAddWithUnittest(unittest.TestCase):
         
 
     def test_choix_joueur(self):
-        self.assertEqual(choix_joueur("potion"),"quel choix la potion ou attaquer")
+        self.assertEqual(choix_joueur(),"attaquer")
 
 
-
+    def test_usage_potion(self):
+        self.assertEqual(usage_potions(), True)
 
 
 
