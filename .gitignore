@@ -9,7 +9,16 @@ __pycache__/
 
 # Fichiers non-utilisés dans le projet.
 Decomposition_regles.ipynb
+Evgeni_fonctions.ipynb
+fonctions_sup.py
+fonctions_supp.ipynb
+liste_fichier_a_ignorer.txt
+manu.ipynb
 Pseudo_code.py
+test_Yvette_fonctions.py
+Yvette_fonctions_a_tester.py
+Yvette_fonctions.ipynb
+__pycache__
 
 
 
