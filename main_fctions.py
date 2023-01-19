@@ -41,16 +41,16 @@ def a_qui(dico_jeu, nbre):
             tour="ennemi"
 
         
-    # elif nbre=="deux":
+    elif nbre=="deux":
     
-    #     if dico_jeu["tour_joueur_1"]<=dico_jeu["tour_joueur_2"]and dico_jeu["tour_joueur_1"]<=dico_jeu["tour_ennemi"]:
-    #         tour="tour_joueur_1"
-    #     elif dico_jeu["tour_joueur_2"]<dico_jeu["tour_joueur_1"]and dico_jeu["tour_joueur_2"] <= dico_jeu["tour_ennemi"]:
-    #         tour="tour_joueur_2"
-    #     elif dico_jeu["tour_joueur_2"]<dico_jeu["tour_ennemi"]:
-    #         tour="ennemi"
-    #     else:
-    #         tour="ennemi"
+        if dico_jeu["tour_joueur_1"]<=dico_jeu["tour_joueur_2"]and dico_jeu["tour_joueur_1"]<=dico_jeu["tour_ennemi"]:
+            tour="tour_joueur_1"
+        elif dico_jeu["tour_joueur_2"]<dico_jeu["tour_joueur_1"]and dico_jeu["tour_joueur_2"] <= dico_jeu["tour_ennemi"]:
+            tour="tour_joueur_2"
+        elif dico_jeu["tour_joueur_2"]<dico_jeu["tour_ennemi"]:
+            tour="ennemi"
+        else:
+            tour="ennemi"
             
     return tour
 
