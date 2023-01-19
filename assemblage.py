@@ -11,9 +11,6 @@ dico_jeu = {
 } # L'ensemble des clé/valeurs necessaire au fonctionnement du jeu.
 
 
-
-
-
 def jouer():
     """Fonction qui assemble le jeu et permet de appeller differents fonctions
        afin de pouvoir jouer.
