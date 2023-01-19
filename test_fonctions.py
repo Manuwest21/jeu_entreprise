@@ -12,7 +12,7 @@ class TestAddWithUnittest(unittest.TestCase):
         self.assertEqual(win_lose({"points_de_vie_joueur" : 50,"points_de_vie_ennemi" : 50}),None)
         self.assertEqual(win_lose(dico_jeu={"points_de_vie_ennemi" : 0}), True)
         self.assertEqual(win_lose(dico_jeu={"points_de_vie_joueur" : 0,"points_de_vie_ennemi" : 50}), False) 
-    
+    # Test de la fonction fin_de_partie
     def test_fin_de_partie(self):
         self.assertEqual(fin_de_partie(dico_jeu = {
      "points_de_vie_joueur" : 50,
@@ -94,6 +94,18 @@ class TestAddWithUnittest(unittest.TestCase):
      "score" : 0
  }), True)
 
+def test_usage_arme(self):
+         print("test")
+         self.assertNotIn("test_item",["epee","arc","epee_deux_mains"],None)
+         self.assertEqual(usage_arme(dico_jeu = {
+     "points_de_vie_joueur" : 50,
+     "points_de_vie_ennemi" : 50,
+     "potions" : 3,
+     "tour_joueur" : 1,
+     "tour_ennemi" : 0,
+     "score" : 0,
+     "arme": ["epee","arc","epee_deux_mains"]
+ }), True)
     
 
 
