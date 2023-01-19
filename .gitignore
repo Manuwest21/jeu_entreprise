@@ -7,11 +7,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Fichiers pas utilisé par le projet.
-Decomposition_regles.ipynb
-Pseudo_code.py
-test_Yvette_fonctions.py
-Yvette_fonctions_a_tester.py
 
 
 # C extensions
@@ -19,6 +14,10 @@ Yvette_fonctions_a_tester.py
 
 
 # Distribution / packaging
+Decomposition_regles.ipynb
+Pseudo_code.py
+test_Yvette_fonctions.py
+Yvette_fonctions_a_tester.py
 .Python
 build/
 develop-eggs/
