@@ -26,13 +26,10 @@ def solo():
         _type_: booleen 
     """
     choix_nbre=0
-    while choix_nbre!= "solo" and choix_nbre!= "duo":
+    while choix_nbre not in ["solo", "duo"]:
         choix_nbre=input(Fore.WHITE + str("tu fais la partie solo ou en duo? ['solo', 'duo']:   ")) #va répéter question [solo ou duo] si pas 1 des 2 items inscrit
         print(Fore.RESET)
-    if choix_nbre=="solo":
-        return True
-    elif choix_nbre=="duo":
-        return False
+    return choix_nbre=="solo"
 
 def a_qui(dico_jeu, nbre):
     """
