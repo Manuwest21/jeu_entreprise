@@ -1,31 +1,39 @@
-from main_fctions import    *
+from main_fctions import *
 import random as rd
-
-dico_jeu = {
-     "points_de_vie_joueur" : 50,
-     "points_de_vie_ennemi" : 50,
-     "potions" : 3,
-     "tour_joueur" : 0,
-     "tour_ennemi" : 0,
-     "score" : 0
-} # L'ensemble des clé/valeurs necessaire au fonctionnement du jeu.
+from colorama import Fore, Back, Style
 
 
 
 
 
 def jouer():
-    """Fonction qui assemble le jeu et permet de appeller differents fonctions
-       afin de pouvoir jouer.
-    """
-    while dico_jeu["points_de_vie_ennemi"]>0 and dico_jeu["points_de_vie_joueur"]>0: # Le jeu continue si il reste des points de vie au joueur ET a l'ennemi.
-
-        if à_qui(dico_jeu): # On détérmine qui doit joueur : joueur ou ennemi.
-            choix_joueur(dico_jeu)  # Si c'est le tour du joueur alors on lui propose les actions qu'il peut effectuer.
-        else:          
-            attaque_ennemi(dico_jeu) # Si c'est le tour de l'ennemi alors il attaque le joueur
-               
-    win_loose(dico_jeu) # On vérifie si les conditions de victoire ou de défaite ont était remplis.
-    fin_de_partie(dico_jeu) # Donne le score détaille de la partie qui viens d'étre faite.
+    mode_solo = solo()
+    if mode_solo:
+        while dico_jeu["points_de_vie_ennemi"]>0 and (dico_jeu["points_de_vie_joueur_1"])>0:
+            nbre='seul'                                   #la boucle va permettre de continuer tant que l'ennemi ou un des joueurs a un niveau de vie supérieur à 0
+            if a_qui(dico_jeu,nbre):                      #détermine à qui est le tour, par alternance
+                tour="joueur_1"
+                choix_joueur(dico_jeu, tour,nbre)         #le joueur choisit son action : attaquer ou boire potion// cela va appeler la fonction de l'action choisie
+            else:                                 
+                tour="ennemi"  
+                attaque_ennemi(dico_jeu,nbre)             # le tour de l'ennemi est automatique, celui d'atatquer// actualisation des scores selon attaque
+    
+    else:                                                 #va introduire la partie à 2 joueurs
+        while dico_jeu["points_de_vie_ennemi"]>0 and dico_jeu["points_de_vie_joueur_1"]>0 and dico_jeu["points_de_vie_joueur_2"]>0:
+            nbre='deux'                                   #le nombre permet d'indiquer aux fonctions si on en mode de partie solo ou duo            
+            if a_qui(dico_jeu,nbre):                      # vérifie si c'est au tour d'un joueur ou de l'ennemi de jouer
+                if quel_joueur_joue():                    # détermine si c'est au tour du joueur 1 ou 2 de jouer
+                    tour="joueur_1" 
+                    choix_joueur(dico_jeu,tour,nbre)      #les joueurs choisissent entre l'attaque et la potion
+                else:
+                    tour="joueur_2"
+                    choix_joueur(dico_jeu,tour,nbre)
+            else: 
+                tour="ennemi"                  
+                attaque_ennemi(dico_jeu, nbre)           # le tour de l'ennemi est automatique, celui d'atatquer// actualisation des scores selon attaque
+                       
+    score_fin_partie(dico_jeu,nbre)                      #calcule le score de fin de partie
+    declaration_vainqueur(dico_jeu,nbre)                 #déclare le vainqueur de la partie
+    
     
 jouer()
