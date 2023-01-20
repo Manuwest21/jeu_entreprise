@@ -46,23 +46,13 @@ def a_qui(dico_jeu, nbre):
     
     if nbre=="seul":
         if dico_jeu["tour_joueur_1"]==dico_jeu["tour_ennemi"]:  ##va se baser sur la comparaison des tours joués de chacun pour désigner à qui est le tour
-            tour=True
-        elif dico_jeu["tour_joueur_1"]<dico_jeu["tour_ennemi"]:
-            tour=False
+            tour="tour_jouer_1"
+            dico_jeu["tour_joueur_1"] +=1
+        elif dico_jeu["tour_joueur_1"]>dico_jeu["tour_ennemi"]:
+            tour="tour_ennemi"
+            dico_jeu["tour_ennemi"] +=1
         
-        
-
-        
-    elif nbre=="deux":                                         ##va se baser sur la comparaison des tours joués de chacun pour désigner à qui est le tour
-    
-        if dico_jeu["tour_joueur_1"]<=dico_jeu["tour_joueur_2"]and dico_jeu["tour_joueur_1"]<=dico_jeu["tour_ennemi"]:
-            tour=True
-        elif dico_jeu["tour_joueur_2"]<dico_jeu["tour_joueur_1"]and dico_jeu["tour_joueur_2"] <= dico_jeu["tour_ennemi"]:
-            tour=True
-        elif dico_jeu["tour_ennemi"]<dico_jeu["tour_joueur_2"]and dico_jeu["tour_ennemi"]<dico_jeu["tour_joueur_2"]:
-            tour=False
-               
-    return tour                                               #retourne un booléen qui va désigner si c'est à un joueur ou à l'ennemi de jouer
+        return tour                                             #retourne un booléen qui va désigner si c'est à un joueur ou à l'ennemi de jouer
 
 
 
@@ -150,7 +140,7 @@ def usage_potions(dico_jeu, tour,nbre):
     """
                                      
   
-    if nbre=="un":
+    if nbre=="seul":
     
         if tour=="joueur_1":                                                             # partie utilisée pour le mode 1 joueur
     
@@ -242,7 +232,7 @@ def score_fin_partie(dico_jeu,nbre):
         dico_jeu
         nbre= si mode solo ou duo
     """
-    if nbre=="un":
+    if nbre=="seul":
         dico_jeu["score_j1"] = dico_jeu["points_de_vie_joueur_1"] + dico_jeu["potions_j1"]*50
         # print("Félicitations ! Vous avez remporté la partie !")
         print(f'joueur 1, tu as su garder {dico_jeu["potions_j1"]} potions >>> ça te rapporte {dico_jeu["potions_j1"]*50} points !') 
@@ -265,7 +255,7 @@ def score_fin_partie(dico_jeu,nbre):
 def jouer():
     mode_solo = solo()
     if mode_solo:
-        while dico_jeu["points_de_vie_ennemi"]>=0 or (dico_jeu["points_de_vie_joueur_1"]>=0 and dico_jeu["points_de_vie_joueur_2"])>=0:
+        while dico_jeu["points_de_vie_ennemi"]>0 or (dico_jeu["points_de_vie_joueur_1"]>0):
             nbre='seul'                                   #la boucle va permettre de continuer tant que l'ennemi ou un des joueurs a un niveau de vie supérieur à 0
             if a_qui(dico_jeu,nbre):                      #détermine à qui est le tour, par alternance
                 tour="joueur_1"
