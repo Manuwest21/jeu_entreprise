@@ -132,7 +132,7 @@ def usage_potions(dico_jeu, tour,nbre):
     #                                     #assignation variable pour afficher nombre de potions restantes
     # cbien_potions_2=dico_jeu["potions_j2"]
     # nbre="deux"
-    if nbre=="un":
+    if nbre=="seul":
     
         if tour=="joueur_1":                                                                     # partie utilisée pour le mode 1 joueur
     
@@ -176,7 +176,7 @@ def attaque_ennemi(dico_jeu,nbre):
     # if dico_jeu["points_de_vie_ennemi"]>0:
     dico_jeu["tour_ennemi"]+=1
     degats_subis_joueur = rd.randint(5,15)
-    if nbre=='un':
+    if nbre=='seul':
         dico_jeu["points_de_vie_joueur_1"]-=degats_subis_joueur
         print(f'-                                                   -tu as subi {degats_subis_joueur} dégâts.') 
         print(f'-                                                   -joueur_1, il te reste {dico_jeu["points_de_vie_joueur_1"]} points de vie')
@@ -193,7 +193,7 @@ def attaque_ennemi(dico_jeu,nbre):
 def declaration_vainqueur(dico_jeu,nbre):
     """Fonction qui verifie les conditions de victoire du Joueur et de l'Ennemi.
     """
-    if nbre=="un":
+    if nbre=="seul":
         if dico_jeu["points_de_vie_ennemi"] <= 0:                                      # declaration vainqueur si le monstre a perdu
             print("Tu as reussi a battre le monstre ! Bien joué !")
             print("Merci d'avoir joué !")
@@ -217,7 +217,7 @@ def declaration_vainqueur(dico_jeu,nbre):
                 print("le joueur 2 est le boss")
 
 def score_fin_partie(dico_jeu,nbre):
-    if nbre=="un":
+    if nbre=="seul":
         dico_jeu["score_j1"] = dico_jeu["points_de_vie_joueur_1"] + dico_jeu["potions_j1"]*50
         # print("Félicitations ! Vous avez remporté la partie !")
         print(f'joueur 1, tu as su garder {dico_jeu["potions_j1"]} potions >>> ça te rapporte {dico_jeu["potions_j1"]*50} points !') 
