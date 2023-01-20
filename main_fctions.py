@@ -1,4 +1,7 @@
 
+import random as rd
+
+
 dico_jeu = {
      "points_de_vie_joueur_1" : 50,
      "points_de_vie_joueur_2":50,
@@ -18,33 +21,40 @@ dico_jeu = {
 
 
 def solo():
+    """"ne prend pas d'arguments
+        demande si on veut jouer en solo ou en duo
+    Returns:
+        _type_: booleen 
+    """
     choix_nbre=0
     while choix_nbre!= "solo" and choix_nbre!= "duo":
-        choix_nbre=input("tu fais la partie solo ou en duo? ['solo', 'duo']:   ")
+        choix_nbre=input("tu fais la partie solo ou en duo? ['solo', 'duo']:   ") #va répéter question [solo ou duo] si pas 1 des 2 items inscrit
     if choix_nbre=="solo":
         return True
     elif choix_nbre=="duo":
         return False
 
-def quel_joueur_joue():
-    if dico_jeu["tour_joueur_1"]<=dico_jeu["tour_joueur_2"]and dico_jeu["tour_joueur_1"]<=dico_jeu["tour_ennemi"]:
-        return True
-    elif dico_jeu["tour_joueur_2"]<dico_jeu["tour_joueur_1"]and dico_jeu["tour_joueur_2"] <= dico_jeu["tour_ennemi"]:
-        return False
-    
-    
 def a_qui(dico_jeu, nbre):
-    
+    """
+    utlisée pour jeu solo et duo: permet de savoir si c'est au joeuur ou à l'ennemi de jouer
+    Args:
+        dico_jeu (_type_): le dico et (via "nbre")le mode de jeu :solo ou duo 
+        nbre (_type_): _description_
+
+    Returns:
+        _type_: booléen pour savoir si c'est à un joueur ou à l'ennemi de jouer
+    """
     
     if nbre=="seul":
-        if dico_jeu["tour_joueur_1"]==dico_jeu["tour_ennemi"]:  
+        if dico_jeu["tour_joueur_1"]==dico_jeu["tour_ennemi"]:  ##va se baser sur la comparaison des tours joués de chacun pour désigner à qui est le tour
             tour=True
         elif dico_jeu["tour_joueur_1"]<dico_jeu["tour_ennemi"]:
             tour=False
         
+        
 
         
-    elif nbre=="deux":
+    elif nbre=="deux":                                         ##va se baser sur la comparaison des tours joués de chacun pour désigner à qui est le tour
     
         if dico_jeu["tour_joueur_1"]<=dico_jeu["tour_joueur_2"]and dico_jeu["tour_joueur_1"]<=dico_jeu["tour_ennemi"]:
             tour=True
@@ -52,10 +62,23 @@ def a_qui(dico_jeu, nbre):
             tour=True
         elif dico_jeu["tour_ennemi"]<dico_jeu["tour_joueur_2"]and dico_jeu["tour_ennemi"]<dico_jeu["tour_joueur_2"]:
             tour=False
-        
-       
-            
-    return tour
+               
+    return tour                                               #retourne un booléen qui va désigner si c'est à un joueur ou à l'ennemi de jouer
+
+
+
+def quel_joueur_joue():
+    """"
+    en jeu "duo": avec alternance des tours, permet de savoir si c'est au joueur 1 ou 2 de jouer
+    Returns:
+        _type_: booléen
+    """
+    if dico_jeu["tour_joueur_1"]<=dico_jeu["tour_joueur_2"]and dico_jeu["tour_joueur_1"]<=dico_jeu["tour_ennemi"]:
+        return True                                                 
+    elif dico_jeu["tour_joueur_2"]<dico_jeu["tour_joueur_1"]and dico_jeu["tour_joueur_2"] <= dico_jeu["tour_ennemi"]:
+        return False
+    #va se baser sur la comparaison des tours joués de chacun pour désigner à qui est le tour
+    
 
 def choix_joueur(dico_jeu, tour,nbre):    #choix d'attaquer ou  utiliser potion.
     """
@@ -68,10 +91,10 @@ def choix_joueur(dico_jeu, tour,nbre):    #choix d'attaquer ou  utiliser potion.
         if dico_jeu["potions_j1"]<1:
             choix=="attaquer"
         else:
-            while choix not in ["boire", "attaquer"]:
+            while choix not in ["boire", "attaquer"]:              #va demander le choix de boire ou d'attaquer / répéte la question si pas un des 2 items
                  choix=input("joueur 1, tu veux attaquer ou boire une potion? [attaquer/boire]:     ")
                  
-        if choix =="attaquer":
+        if choix =="attaquer":                                     #selon choix, va appeler la fonction "attaque" ou "boire potion"
             attaque_joueur(dico_jeu,tour)
         elif choix=="boire":
             usage_potions(dico_jeu,tour,nbre)
@@ -99,21 +122,20 @@ def attaque_joueur(dico_jeu,tour):
     
     il affiche un nombre aléatoire de dégas subis entre 5 et 10 et le nombre de points de vie restant à l'ennemi
     """
-    # fonction attaque qui enlève les points à l'ennemi de manière aléatoire
-    # if dico_jeu["points_de_vie_joueur"]>0:
+   
     if tour=="joueur_1":
         
-        dico_jeu["tour_joueur_1"]+=1
-        degats_subis_ennemi = rd.randint(5,10)
-        dico_jeu["points_de_vie_ennemi"]-= degats_subis_ennemi
+        dico_jeu["tour_joueur_1"]+=1                                                       #actualise nombre de tour joué pour alternance de jeu
+        degats_subis_ennemi = rd.randint(5,10)                                             #génération d'un nombre aléatoire pour notre attaque
+        dico_jeu["points_de_vie_ennemi"]-= degats_subis_ennemi                             #actualisation des points de l'ennemi
         print(f"vous avez infligé {degats_subis_ennemi} dégâts à l'ennemi") 
         print(f'                                          points de vie de ennemi >>> {dico_jeu["points_de_vie_ennemi"]} ')
     
     elif tour=="joueur_2":
         
-        dico_jeu["tour_joueur_2"]+=1
-        degats_subis_ennemi = rd.randint(5,10)
-        dico_jeu["points_de_vie_ennemi"]-= degats_subis_ennemi
+        dico_jeu["tour_joueur_2"]+=1                                                      #actualise nombre de tour joué pour alternance de jeu
+        degats_subis_ennemi = rd.randint(5,10)                                            #génération d'un nombre aléatoire pour notre attaque
+        dico_jeu["points_de_vie_ennemi"]-= degats_subis_ennemi                            #actualisation des points de l'ennemi
         print(f"vous avez infligé {degats_subis_ennemi} dégâts à l'ennemi") 
         print(f'il lui reste{dico_jeu["points_de_vie_ennemi"]} points de vie ')
     
@@ -127,39 +149,38 @@ def usage_potions(dico_jeu, tour,nbre):
     affiche le nombre de points de vie gagnés
     s'il prend la potion fait passer le prochain tour au joueur
     """
-                                     #assignation de variables pour afficher score temporaire
-    # vie_j2=dico_jeu["points_de_vie_joueur_2"]
-    #                                     #assignation variable pour afficher nombre de potions restantes
-    # cbien_potions_2=dico_jeu["potions_j2"]
-    # nbre="deux"
+                                     
+  
     if nbre=="un":
     
-        if tour=="joueur_1":                                                                     # partie utilisée pour le mode 1 joueur
+        if tour=="joueur_1":                                                             # partie utilisée pour le mode 1 joueur
     
-             dico_jeu["potions_j1"]-=1
-             cbien_potions_1=dico_jeu["potions_j1"]                                  #retire 1 potion au nombre de potions restantes
-             dico_jeu["tour_joueur_1"]+=2                                           #adaptation du nombre de tour pour que le tour prochain soit passé
-             pts_potion=rd.randint(15,50)                                           #génération nombre aléatoire
-             
-             vie_j1=dico_jeu["points_de_vie_joueur_1"]+pts_potion #nombre ajouté au nombre de points de vie
+             dico_jeu["potions_j1"]-=1                                                   #retire 1 potion au nombre de potions restantes
+             cbien_potions_1=dico_jeu["potions_j1"]                                      #assignation variable pour indiquer nombre de portions restantes
+             dico_jeu["tour_joueur_1"]+=2                                                #adaptation du nombre de tour pour que le tour prochain soit passé
+             pts_potion=rd.randint(15,50)                                                #génération nombre aléatoire    
+             dico_jeu["points_de_vie_joueur_1"]+=pts_potion   
+             vie_j1=dico_jeu["points_de_vie_joueur_1"]                                   #nombre ajouté au nombre de points de vie
              print(f"joueur 1, tu as gagné {pts_potion} de vie!   {vie_j1}     de vie et      {cbien_potions_1} potions restantes ") 
     
-    elif nbre=="deux":                                                         # partie utilisée pour le mode 2 joueurs
+    elif nbre=="deux":                                                                    # partie utilisée pour le mode 2 joueurs
         
         if tour=="joueur_1":            
             dico_jeu["potions_j1"]-=1
-            cbien_potions_1=dico_jeu["potions_j1"]        
+            cbien_potions_1=dico_jeu["potions_j1"]                                        #assignation variable pour afficher nombre de potions restantes
             dico_jeu["tour_joueur_1"]+=2
             pts_potion=rd.randint(15,50)
-            vie_j1=dico_jeu["points_de_vie_joueur_1"]+pts_potion
+            dico_jeu["points_de_vie_joueur_1"]+=pts_potion
+            vie_j1=dico_jeu["points_de_vie_joueur_1"]                                    #assignation variable pour afficher niveau de vie actuel
             print(f"joueur 1, tu as gagné {pts_potion} de viee!   {vie_j1}     de vie et      {cbien_potions_1} potions restantes ")                         
         
         else:
             dico_jeu["potions_j2"]-=1 
             cbien_potions_2=dico_jeu["potions_j2"] 
             dico_jeu["tour_joueur_2"]+=2
-            pts_potion=rd.randint(15,50)
-            vie_j2=dico_jeu["points_de_vie_joueur_2"]+pts_potion
+            pts_potion=rd.randint(15,50)                                                #génération nombre aléatoire de points de vie de la potion
+            dico_jeu["points_de_vie_joueur_2"]+=pts_potion
+            vie_j2=dico_jeu["points_de_vie_joueur_2"]
             print(f"joueur 2, tu as gagné {pts_potion} de vie!    {vie_j2}     de vie et       {cbien_potions_2} potions restantes ")
     
     
@@ -173,34 +194,33 @@ def attaque_ennemi(dico_jeu,nbre):
     la fonction permet à l'ennemi d'attaquer le joueur
     il affiche un nombre aléatoire de dégas subis et le nombre de points de vie restants au joueur
     """
-    # if dico_jeu["points_de_vie_ennemi"]>0:
+   
     dico_jeu["tour_ennemi"]+=1
     degats_subis_joueur = rd.randint(5,15)
     if nbre=='un':
-        dico_jeu["points_de_vie_joueur_1"]-=degats_subis_joueur
+        dico_jeu["points_de_vie_joueur_1"]-=degats_subis_joueur                          #actualise le nombre des points des joueurs selon attaque ennemi
         print(f'-                                                   -tu as subi {degats_subis_joueur} dégâts.') 
         print(f'-                                                   -joueur_1, il te reste {dico_jeu["points_de_vie_joueur_1"]} points de vie')
     elif nbre== 'deux':
-        dico_jeu["points_de_vie_joueur_1"]-=degats_subis_joueur
+        dico_jeu["points_de_vie_joueur_1"]-=degats_subis_joueur                          #actualise le nombre des points des joueurs selon attaque ennemi
         dico_jeu["points_de_vie_joueur_2"]-=degats_subis_joueur
         print(f'--                                              vous avez subi {degats_subis_joueur} dégâts.') 
         print(f'-                                                                          -niveau de vie actuel  >>> joueur 1:{dico_jeu["points_de_vie_joueur_1"]}')
         print(f'                                                                                                      joueur 2:{dico_jeu["points_de_vie_joueur_2"]}')
-        # print(f'-                                                                        -joueur_2, il te reste {dico_jeu["points_de_vie_joueur_2"]} points de vie')
-        # print("niveau de vie actuel >>>  joueur 1: {} #########joueur 2:{}.format{dico_jeu["points_de_vie_joueur_1"]}{dico_jeu["points_de_vie_joueur_2"]}")                                                   ')
-
+        
 
 def declaration_vainqueur(dico_jeu,nbre):
     """Fonction qui verifie les conditions de victoire du Joueur et de l'Ennemi.
+    args= le dico et le mode de jeu (solo ou duo)
     """
-    if nbre=="un":
+    if nbre=="un":                                                                
         if dico_jeu["points_de_vie_ennemi"] <= 0:                                      # declaration vainqueur si le monstre a perdu
             print("Tu as reussi a battre le monstre ! Bien joué !")
             print("Merci d'avoir joué !")
-        elif dico_jeu["score_j1"]<=0:
+        elif dico_jeu["score_j1"]<=0:                                                 #déclaration du monstre vainqueur si notre niveau de vie est de 0 ou moins
             print("Le monstre vous a battu ! Il n'y a donc plus d'éspoir...")
             
-    elif nbre=="deux":
+    elif nbre=="deux":                                                                 #déclaration vainqueur en mode duo
         if dico_jeu["points_de_vie_ennemi"] <= 0:                                      # declaration vainqueur si le monstre a perdu
             if dico_jeu["score_j1"]<dico_jeu["score_j2"]:
                 print("le_joueur_2 gagne!")
@@ -209,14 +229,20 @@ def declaration_vainqueur(dico_jeu,nbre):
             else:                                                                    
                 print("vous êtes déclaré tous les 2 vainqueurs ex-aequo!!") 
                 
-        elif dico_jeu["score_j1"] <= 0 and dico_jeu["score_j1"]<=0:
-            print("le monstre est le boss!")
-            if dico_jeu["score_j1"] <= 0 and dico_jeu["score_j1"]>=0:
+        elif dico_jeu["score_j1"] <= 0 and dico_jeu["score_j2"]<=0:               
+            print("le monstre est le boss!")                                         #déclaration de l'ennemi vainqueur si les scores des 2 joueurs sont à 0 ou moins
+            if dico_jeu["score_j1"] <= 0 and dico_jeu["score_j2"]>=0:
                 print("le joueur 2 est le boss")
-            elif dico_jeu["score_j1"] >= 0 and dico_jeu["score_j1"]<=0:
+            elif dico_jeu["score_j1"] >= 0 and dico_jeu["score_j2"]<=0:             # le joueur qui a le plus de points de vie est déclaré vainqueur
                 print("le joueur 2 est le boss")
 
 def score_fin_partie(dico_jeu,nbre):
+    """"
+    va calculer et afficher le score de fin de partie
+    Args:
+        dico_jeu
+        nbre= si mode solo ou duo
+    """
     if nbre=="un":
         dico_jeu["score_j1"] = dico_jeu["points_de_vie_joueur_1"] + dico_jeu["potions_j1"]*50
         # print("Félicitations ! Vous avez remporté la partie !")
@@ -232,18 +258,6 @@ def score_fin_partie(dico_jeu,nbre):
             print(f'joueur 1, tu as su garder {dico_jeu["potions_j2"]} potions   >>> ça te rapporte {dico_jeu["potions_j2"]*50} points !') 
             print(f'                                                               voici vos scores:                      >>> joueur 1: {dico_jeu["score_j1"]} points')
             print(f'                                                                                                          joueur 2: {dico_jeu["score_j2"]} points')
-            # if {dico_jeu["score_j1"]}>{dico_jeu["score_j2"]}:
-            #     gagnant="joueur 1"
-            # elif {dico_jeu["score_j2"]}>{dico_jeu["score_j1"]}:
-            #     gagnant="joueur 2"
-                 
-            # print(f'Vous avez su gagner avec {dico_jeu["points_de_vie_joueur_1"]} points de vie restant pour {dico_jeu["points_de_vie_joueur"]} points !')
-        # elif dico_jeu["points_de_vie_joueur_1"] <=0:
-        #     dico_jeu["score"] = 0
-        #     print("Vous avez pas su l'emporter. Courage, vous ferez mieux la prochaine fois !")
-        #     print(f'Votre score pour cette partie est de {dico_jeu["score"]} points...')
-        # else :
-        #     pass
+           
     with open("score.txt", "w") as fichier:
         fichier.write(f' Score de la partie : {dico_jeu["score_J1"]} points ! ; Score de la partie : {dico_jeu["score_J2"]} points !')
-        
