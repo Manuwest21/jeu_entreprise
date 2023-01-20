@@ -21,12 +21,12 @@ tour=0
 
 
 def jouer():
-    solo()
-    if solo:
+    mode_solo = solo()
+    if mode_solo:
             while dico_jeu["points_de_vie_ennemi"]>0 and dico_jeu["points_de_vie_joueur_1"]>0 and dico_jeu["points_de_vie_joueur_2"]>0:
         
                 nbre='seul'
-                #dico_jeu["points_de_vie_joueur_2"]=50                  #points de vie de joueur 2>> ramené à 0>> pr laisser place combat entre ennemi et joueur 1
+                dico_jeu["points_de_vie_joueur_2"]=0                  #points de vie de joueur 2>> ramené à 0>> pr laisser place combat entre ennemi et joueur 1
                 #dico_jeu["points_de_vie_ennemi"]=60 / pour augmenter difficulté
                 
                 if a_qui(dico_jeu,nbre)== "tour_joueur_1":
@@ -56,7 +56,7 @@ def jouer():
         
                 declaration_vainqueur(dico_jeu)
                 score_fin_partie(dico_jeu)
-    
+                print  (  "       niveau de vie actuel >>>  joueur 1: {} #########joueur 2:{}.format {dico_jeu["points_de_vie_joueur_1"]}{dico_jeu["points_de_vie_joueur_2"]}")
 jouer()
 
 
